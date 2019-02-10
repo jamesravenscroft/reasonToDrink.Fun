@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title class="fas fa-beer">Reason to Drink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css' integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
+    <link rel="shortcut icon" type="image/jpg" href="assets/beer.jpg">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Dawning+of+a+New+Day|Staatliches|Thasadith" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <!-- Compiled and minified CSS -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="./assets/javascript/moment.js"></script>
+</head>
+<body>
+    <div class="container">
+      <div class="jumbotron bg-white">
+        <h1 id="display-3">Reason to Drink!</h1>
+        <p id="lead-1">You're awesome. It's time to celebrate.</p>
+        <hr class="my-4">
+        <br>
+        <img src="assets/images/beerPourTap.gif" class="center">
+        <!-- <p>Find a reason to celebrate and a brewery to get crunk at.</p> -->
+
+        <div class="starter-template"> 
+          <div class= "marquee">
+            <p>:::San Diego Events:::~:::San Diego Events:::~
+              :::San Diego Events:::~:::San Diego Events:::~:::San Diego Events:::~
+              :::San Diego Events:::~:::San Diego Events:::^:::San Diego Events:::~
+              <br>
+              ~~Sundays 630PM: Trivia at Eastbound Grill-Lakeside,
+              ~~Tuesdays 7PM: Trivia at Second Chance Beer Lounge- North Park,
+              ~~Thursdays 7PM: Trivia at Dog Haus Biergarten- Gaslamp.
+            </p>
+          </div>
+          <h1 id="display-4">How to Play</h1>
+          <p id="lead-2">Enter your info. Find a holiday to celebrate and a brewery to drink at. Cheers!<br>
+          </p>
+          </div>
+      <!-- </div>   -->
+
+    <div class="row">
+        <input class="input-text" id="name" type="text" placeholder="What's your name?">
+        <!--JR3: I think we should leave this part alone for year, it doesn't matter if the user thinks its 2019-->
+        <input class="input-text" id="date" type="date" placeholder="Today's date (mm/dd/yyyy)">
+        <input class="input-text" id="country" type="text" placeholder="Search a country code to find a holiday!">
+        <input class="input-text" id="state" type="text" placeholder="What state are you drinking in?">
+        <input class="input-text" id="region" type="text" placeholder="What city are you drinking in?">
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-primary btn-floating btn-large pulse" id="submit">Submit</button>
+      </div>
+
+      <div id="user-info">
+        <h2 id="name-display"></h2>
+        <h4 id="date-display"></h4>
+        <h4 id="country-display"></h4>
+        <h4 id="state-display"></h4>
+        <h4 id="region-display"></h4>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="holStuff">
+            <!--Holiday stuff goes here -->
+          </div>
+        </div>
+      </div>
+      <!-- ADDED LIST OF BREWERIES BASED ON USER INFO -->
+      <div class="row">
+        <div class="col-md-6">
+          <div id="brewDiv" class="panel-body">
+            <table id="brewTable" class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Brewery</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Country</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+          </div>
+        </div>
+
+      </div>
+
+      <script>
+      $(document).ready(function(){
+
+        var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+$('#date').val(today);
+
+
+var config = {
+    apiKey: "AIzaSyAcInbqzuEob8iQJg2J9F_6qW_09Ct9FTQ",
+    authDomain: "reason-to-drink.firebaseapp.com",
+    databaseURL: "https://reason-to-drink.firebaseio.com",
+    projectId: "reason-to-drink",
+    storageBucket: "reason-to-drink.appspot.com",
+    messagingSenderId: "115034502037"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+  $("#submit").on("click", function(event) {
+    event.preventDefault();
+  
+    var name = $("#name").val().trim();
+    console.log(name);
+
+//JR3: OK I think this is the part we need to append the year
+    var date = $("#date").val().trim();
+    console.log(date);
+
+
+    var country = $("#country").val().trim();
+    console.log(country);
+    var state = $("#state").val().trim();
+    console.log(state);
+    var region = $("#region").val().trim();
+    console.log(region);
+  
+    var toAdd = {
+      name: name,
+      date: date,
+      country: country,
+      state: state,
+      region: region
+    }
+    
+  
+    database.ref().push(toAdd);
+
+
+    database.ref().on("value", function(snapshot) {
+        $("#name-display").text(snapshot.val().name);
+        $("#date-display").text(snapshot.val().date);
+        $("#country-display").text(snapshot.val().country);
+        $("#state-display").text(snapshot.val().state);
+        $("#region-display").text(snapshot.val().region);
+        
+      })
+
+      console.log(date);
+
+      searchCity = $("#region").val();
+      searchState = $("#state").val();
+      searchCountry = $("#country").val();
+      clearResults("brewTable");
+      getHolidays();
+      getBreweries(searchCountry, searchState, searchCity);
+      
+
+       
+        }) 
+  });
+
+
+///////////////////  BREWERY API CODE  /////////////////////////////////////
+
+var searchDate;
+// JR3: we might want to change this to breweryYear so we don't have a conflict between the holiday api and brewery api
+var year = "2019";
+var month = "01";
+var day = "19";
+var searchCountry;
+var searchState;
+var searchCity;
+
+// if objects need to load in doc first
+$(document).ready(function(){
+
+});
+
+function getHolidays() {
+
+  var country = searchCountry;
+  console.log(country);
+  var date = "2019";
+  var state = searchState;
+  console.log(state);
+
+  var enteredDate = $("#date").val();
+
+  momentDate = moment(enteredDate).format('YYYY-MM-DD');
+  momentStartDate = moment(enteredDate).subtract(14, 'days');
+  momentEndDate = moment(enteredDate).add(14, 'days');
+
+  startDate = moment(momentStartDate).format('YYYY-MM-DD');
+  endDate = moment(momentEndDate).format('YYYY-MM-DD');
+
+  var queryURLTwo = "https://calendarific.com/api/v1/holidays?country=" + country + "&year=" + date + "&state=" + state + "&api_key=a964218e0494e47c37482a2d99753eaa276f1978";
+
+  $.ajax({
+   url: queryURLTwo,
+   method: "GET"
+   }).then(function(response) {
+      console.log(response);
+      var useMe = response.response.holidays;
+      $("#holStuff").html("<h5>Sorry, we couldnt find an excuse for you, try a different country, be cultured. ");
+      for(i=0; i<response.response.holidays.length; i++){
+        if(startDate < response.response.holidays[i].date && response.response.holidays[i].date < endDate){
+            // var responseDate = response.response.holidays[i].date;
+            var responseDate = response.response.holidays[i].date;
+            responseDate = responseDate.slice(0,-9);
+            responseDate = moment(responseDate).format('LL');
+            var responseName = response.response.holidays[i].name;
+            $("#holStuff").html("<h4>Holidays</h4><div class='row'><div class='col-md-6'>" 
+                                  + responseDate 
+                                  + "</div><div class='col-md-6'>" 
+                                  + responseName 
+                                  + "</div><div>");
+         } 
+      }
+   });
+};
+
+function getBreweries(country, state, city){
+    var queryURL = "https://api.openbrewerydb.org/breweries?";
+    if(city) queryURL = queryURL + "&by_city=" + city;
+    if(state) queryURL = queryURL  + "&by_state=" + state;
+    if(country) queryURL = queryURL  + "&by_country=" + country;
+
+    callAjax(queryURL);
+
+    };
+
+function callAjax(queryURL){
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      .then(function(response) {
+        //$("#resultsDiv").text(JSON.stringify(response));
+        for(i=0; i<response.length; i++){
+          var resultName = response[i].name; 
+          var resultCity = response[i].city; 
+          var resultState = response[i].state;
+          var resultCountry = response[i].country; 
+          var resultStreet = response[i].street;
+          var resultZip = response[i].postal_code;
+          var resultPhone = response[i].phone;
+          var resultSite = response[i].website_url;
+          var resultBreweryType = response[i].brewery_type;
+        $("#brewTable").append(
+                                "<tr>" 
+                                + "<td>" 
+                                  + "<div><h5>" + resultName + "</h5></div>" 
+                                  + "<div><a href='" + resultSite + "'>" + resultSite + "</a></div>" 
+                                  + "<div>" + resultStreet + "</div>" 
+                                + "</td>" 
+                                + "<td>" + resultCity + "</td><td>" + resultState + "</td><td>" + resultCountry + "</td><td></tr>");
+        
+        }
+        // console.log(response);
+      });
+  };
+
+
+
+
+function clearResults(tableID){
+    $("#"+tableID+ " tbody").empty();
+    $("#holStuff").empty();
+}      
+      
+// function marqueeSplit{
+//   .p(split)
+// }
+      </script>
+</body>
+</html>

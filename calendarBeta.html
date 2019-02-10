@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Group Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <!-- Compiled and minified CSS -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="./assets/javascript/app.js"></script> -->
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+        <h1 class="display-4">Reason to Drink!</h1>
+        <p class="lead">You're awesome. Its time to celebrate</p>
+        <hr class="my-4">
+        <p>Find a reason to celebrate and a brewery to get crunk at.</p>
+
+        <div class="starter-template">
+            <h1>Pick a Day</h1>
+            <p class="lead">Click a day and get ready to party away.<br>
+            </p>
+          </div>
+
+
+    <div class="row">
+        <input id="name" type="text" placeholder="Your name">
+        <input id="date" type="text" placeholder="Today's date (mm/dd/yyyy)">
+        <input id="country" type="text" placeholder="Pick a country">
+        <input id="state" type="text" placeholder="Pick a state">
+        <input id="region" type="text" placeholder="Pick a city">
+      </div>
+      <div class="row">
+        <button class="button-primary" id="submit">Submit</button>
+      </div>
+
+      <div id="user-info">
+        <h2 id="name-display"></h2>
+        <h4 id="date-display"></h4>
+        <h4 id="country-display"></h4>
+        <h4 id="state-display"></h4>
+        <h4 id="region-display"></h4>
+        
+      </div>
+
+
+      <script>
+      $(document).ready(function(){
+
+var config = {
+    apiKey: "AIzaSyAcInbqzuEob8iQJg2J9F_6qW_09Ct9FTQ",
+    authDomain: "reason-to-drink.firebaseapp.com",
+    databaseURL: "https://reason-to-drink.firebaseio.com",
+    projectId: "reason-to-drink",
+    storageBucket: "reason-to-drink.appspot.com",
+    messagingSenderId: "115034502037"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+  $("#submit").on("click", function(event) {
+    event.preventDefault();
+  
+    var name = $("#name").val().trim();
+    console.log(name);
+    var date = $("#date").val().trim();
+    console.log(date);
+    var country = $("#country").val().trim();
+    console.log(country);
+    var state = $("#state").val().trim();
+    console.log(state);
+    var region = $("#region").val().trim();
+    console.log(region);
+  
+    var toAdd = {
+      name: name,
+      date: date,
+      country: country,
+      state: state,
+      region: region
+    }
+    
+  
+    database.ref().push(toAdd);
+
+
+    database.ref().on("value", function(snapshot) {
+        $("#name-display").text(snapshot.val().name);
+        $("#date-display").text(snapshot.val().date);
+        $("#country-display").text(snapshot.val().country);
+        $("#state-display").text(snapshot.val().state);
+        $("#region-display").text(snapshot.val().region);
+        
+      })
+
+      $("#user-info").append(
+        $("<tr>").append(
+          $("<td>").text(name),
+          $("<td>").text(date),
+          $("<td>").text(country),
+          $("<td>").text(state),
+          $("<td>").text(region)
+        )
+      )
+
+      console.log(date);
+
+
+        // var queryURL = "https://www.calendarindex.com/api/v1/holidays?api_key=a964218e0494e47c37482a2d99753eaa276f1978&country=us" + "&year=" + year;
+
+        }) 
+  });
+
+      
+      
+      </script>
+</body>
+</html>
