@@ -1,8 +1,8 @@
-<a href="http://reasontodrink.fun"><img src="https://jamesravenscroft.github.io/groupProject1/assets/images/beerPourTap.gif" title="FVCproductions" alt="FVCproductions"></a>
+<a href="http://reasontodrink.fun"><img src="https://jamesravenscroft.github.io/groupProject1/assets/images/beerPourTap.gif" title="beerPour" alt="BeerPourAnimation"></a>
 
 <!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
 
-***INSERT GRAPHIC HERE (include hyperlink in image)***
+***Reason To Drink***
 
 # Repository Title Goes Here
 
