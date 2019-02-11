@@ -4,7 +4,8 @@
 
 ***Reason To Drink***
 
-# Repository Title Goes Here
+Jamie Resume is here: reasontodrink.fun/resume/index.html
+
 
 > Subtitle or Short Description Goes Here
 
