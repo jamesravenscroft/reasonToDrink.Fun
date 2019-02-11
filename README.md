@@ -7,11 +7,9 @@
 Jamie Resume is here: https://github.com/jamesravenscroft/reasontodrink.fun/resume/index.html
 
 
-> Subtitle or Short Description Goes Here
+https://www.reasontodrink.fun
 
-> ideally one sentence
-
-> include terms/tags that can be searched
+is still being switched over/ mirrored.
 
 **Badges will go here**
 
