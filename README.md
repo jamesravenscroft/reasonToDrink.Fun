@@ -4,7 +4,7 @@
 
 ***Reason To Drink***
 
-Jamie Resume is here: reasontodrink.fun/resume/index.html
+Jamie Resume is here: https://github.com/jamesravenscroft/reasontodrink.fun/resume/index.html
 
 
 > Subtitle or Short Description Goes Here
