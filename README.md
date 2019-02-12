@@ -4,7 +4,7 @@
 
 ***Reason To Drink***
 
-Jamie Resume is here: https://github.com/jamesravenscroft/reasontodrink.fun/resume/index.html
+Jamie Resume is here:https://github.com/jamesravenscroft/reasonToDrink.Fun/blob/master/resume/index.html
 
 
 https://www.reasontodrink.fun
