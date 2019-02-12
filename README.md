@@ -4,13 +4,12 @@
 
 ***Reason To Drink***
 
-# Repository Title Goes Here
+Jamie Resume is here:https://github.com/jamesravenscroft/reasonToDrink.Fun/blob/master/resume/index.html
 
-> Subtitle or Short Description Goes Here
 
-> ideally one sentence
+https://www.reasontodrink.fun
 
-> include terms/tags that can be searched
+is still being switched over/ mirrored.
 
 **Badges will go here**
 
