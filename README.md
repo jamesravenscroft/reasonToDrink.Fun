@@ -3,13 +3,17 @@
 <!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
 
 ***Reason To Drink***
-
-Jamie Resume is here:https://github.com/jamesravenscroft/reasonToDrink.Fun/blob/master/resume/index.html
-
-
 https://www.reasontodrink.fun
 
-is still being switched over/ mirrored.
+REASONTODRINK.FUN IS OPERATIONAL
+
+Find a reason to drink. Celebrate Holidays at Local Breweries across the country.
+
+Jamie Resume is here: www.jamesravenscroft3.com
+
+
+
+************************BELOW IS A TEMPLATE IN PROGRESS*************
 
 **Badges will go here**
 
